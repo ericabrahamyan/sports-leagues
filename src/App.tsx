@@ -1,10 +1,14 @@
-import './App.css';
+import { Box } from '@chakra-ui/react';
+
+import { Header } from './components/Header';
+import { Leagues } from './components/Leagues';
 
 function App() {
   return (
-    <div className="app">
-      <h1>Sports Leagues</h1>
-    </div>
+    <Box minH="100vh">
+      <Header />
+      <Leagues />
+    </Box>
   );
 }
 
