@@ -8,7 +8,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'vite.config.ts']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -26,13 +26,26 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
+      'react-refresh/only-export-components': 'off',
       'import/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'type'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
-          pathGroups: [{ pattern: '**/*.{css,scss,less}', group: 'type', position: 'after' }],
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: 'react-**',
+              group: 'external',
+              position: 'before',
+            },
+            { pattern: '**/*.{css,scss,less}', group: 'type', position: 'after' },
+          ],
           pathGroupsExcludedImportTypes: ['type'],
         },
       ],
